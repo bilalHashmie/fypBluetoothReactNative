@@ -9,16 +9,17 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
-  NavigationContainer,
-  DefaultTheme,
   DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
-import Colors from '../constants/Colors';
+import Colors from '@src/constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import AudioSetter from '../src/screens/AudioSetter';
 import ModalScreen from '../src/screens/ModalScreen';
 import NotFoundScreen from '../src/screens/NotFoundScreen';
 import TabOneScreen from '../src/screens/TabOneScreen';
@@ -105,6 +106,22 @@ const BottomTabNavigator = () => {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
+          ),
+        })}
+      />
+      <BottomTab.Screen
+        name="TabNew"
+        component={AudioSetter}
+        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
+          title: 'Tab One',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Modal')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            />
           ),
         })}
       />
